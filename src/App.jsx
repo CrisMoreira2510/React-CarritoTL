@@ -10,10 +10,14 @@ import Contacto from './components/Contacto';
 import Carrito from './components/Carrito';
 import Productos from './components/Productos';
 import DetalleProducto from './components/DetalleProducto';
+import Admin from './components/Admin';
+import Login from './components/Login';
 import Footer from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
+import RutaProtegida from './components/RutaProtegida';
 
 function App() {
+  const [isAuthenticated, setisAuthenticated] = useState(false);
   
    const[carrito,setCarrito] = useState([]);
     
@@ -33,6 +37,13 @@ function App() {
           <Route path={'/'} element= {<Inicio/>}/>
           <Route path={'/Contacto'} element= {<Contacto/>}/>
           <Route path={'/Productos/:id'} element= {<DetalleProducto/>}/>
+
+          <Route path={'/Admin'} element= {
+            <RutaProtegida isAuthenticated={isAuthenticated}>
+              <Admin/>
+            </RutaProtegida>
+            }/>
+          <Route path={'/Login'} element= {<Login/>}/>
         </Routes>
         <Productos agregarCarrito={agregarCarrito} />
         <Carrito carrito={carrito} vaciarCarrito={vaciarCarrito} />        
