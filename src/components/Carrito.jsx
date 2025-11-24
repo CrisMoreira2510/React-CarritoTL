@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { CarritoContext } from "../context/CarritoContext";
 
-const Carrito = ({ carrito, vaciarCarrito }) => {
+function Carrito() {
+ const { carrito, vaciarCarrito } = useContext(CarritoContext);
     
   return (
-    <div>
+     <div>
       <h2>Carrito</h2>
-      {carrito.length === 0 ? (
-        <p>El carrito está vacío.</p>
+
+      {carrito.length > 0 ? (
+        <>
+          <ul>
+            {carrito.map((producto, index) => (
+              <li key={index}>
+                {producto.nombre} - ${producto.precio}
+              </li>
+            ))}
+          </ul>
+          <button onClick={vaciarCarrito}>Vaciar Carrito</button>
+        </>
       ) : (
-        carrito.map((producto, index) => (
-          <p key={index}>
-            {producto.nombre}: ${producto.precio}
-          </p>
-        ))
+        <p>El carrito está vacío.</p>
       )}
-      <button onClick={vaciarCarrito}>Vaciar Carrito</button>
     </div>
   );
-}
+};
 export default Carrito;

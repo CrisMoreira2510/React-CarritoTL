@@ -18,21 +18,15 @@ import RutaProtegida from './components/RutaProtegida';
 
 function App() {
   const [isAuthenticated, setisAuthenticated] = useState(false);
-  
-   const[carrito,setCarrito] = useState([]);
-    
-    const agregarCarrito = (producto)=>{
-        setCarrito([...carrito, producto]);
-    }
-    const vaciarCarrito = () =>{
-        setCarrito([]);
-    }
+
+   
 
   return (
     <>
       <div>
         <Header />  
         <Nav />
+
         <Routes>
           <Route path={'/'} element= {<Inicio/>}/>
           <Route path={'/Contacto'} element= {<Contacto/>}/>
@@ -45,8 +39,8 @@ function App() {
             }/>
           <Route path={'/Login'} element= {<Login/>}/>
         </Routes>
-        <Productos agregarCarrito={agregarCarrito} />
-        <Carrito carrito={carrito} vaciarCarrito={vaciarCarrito} />        
+
+              
         <Footer />                 
       </div>      
     </>
