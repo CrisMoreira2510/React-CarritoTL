@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 
 function Carrito() {
- const { carrito, vaciarCarrito } = useContext(CarritoContext);
+ const { carrito, vaciarCarrito, eliminarDelCarrito } = useContext(CarritoContext);
     
   return (
      <div>
@@ -14,6 +14,9 @@ function Carrito() {
             {carrito.map((producto, index) => (
               <li key={index}>
                 {producto.nombre} - ${producto.precio}
+
+                <button onClick={()=> eliminarDelCarrito(index)}>Eliminar</button>
+
               </li>
             ))}
           </ul>
