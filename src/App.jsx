@@ -17,9 +17,7 @@ import { Route, Routes } from 'react-router-dom';
 import RutaProtegida from './components/RutaProtegida';
 
 function App() {
-  const [isAuthenticated, setisAuthenticated] = useState(false);
-
-   
+    
 
   return (
     <>
@@ -33,7 +31,7 @@ function App() {
           <Route path={'/Productos/:id'} element= {<DetalleProducto/>}/>
 
           <Route path={'/Admin'} element= {
-            <RutaProtegida isAuthenticated={isAuthenticated}>
+            <RutaProtegida>
               <Admin/>
             </RutaProtegida>
             }/>
