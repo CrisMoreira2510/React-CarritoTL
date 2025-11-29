@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     // Simulación de autenticación
     if (usuario === 'admin' && password === '1234') {
-      login(user);
+      login(usuario);
       navigate('/Admin');
     } else {
       alert('Credenciales incorrectas');

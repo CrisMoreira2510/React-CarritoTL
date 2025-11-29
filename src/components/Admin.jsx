@@ -1,4 +1,13 @@
+import GestionProductos from "./GestionProductos";
+
 const Admin = () => {
-    return <h1>Admin</h1>
+
+    return(
+    <div>
+      <h1>Productos</h1>
+      <GestionProductos />
+    </div>
+    )
+    
 }
 export default Admin;
