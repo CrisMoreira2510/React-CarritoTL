@@ -31,12 +31,13 @@ function FormularioProducto({ onAgregar, onCerrar }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="d-flex flex-column gap-3"
+     onSubmit={handleSubmit}>
       <h2>Agregar Producto</h2>
 
       <div style={{ marginBottom: "10px" }}>
         <label>Nombre:</label>
-        <input
+        <input className="form-control"
           type="text"
           name="nombre"
           value={producto.nombre}
@@ -47,7 +48,7 @@ function FormularioProducto({ onAgregar, onCerrar }) {
 
       <div style={{ marginBottom: "10px" }}>
         <label>Precio:</label>
-        <input
+        <input className="form-control"
           type="number"
           name="precio"
           value={producto.precio}
@@ -59,7 +60,7 @@ function FormularioProducto({ onAgregar, onCerrar }) {
 
       <div style={{ marginBottom: "10px" }}>
         <label>Descripción:</label>
-        <textarea
+        <textarea className="form-control"
           name="descripcion"
           value={producto.descripcion}
           onChange={handleChange}
@@ -69,7 +70,7 @@ function FormularioProducto({ onAgregar, onCerrar }) {
 
       <div style={{ marginBottom: "10px" }}>
         <label>URL Imagen:</label>
-        <input
+        <input className="form-control"
           type="text"
           name="imagen"
           placeholder=""

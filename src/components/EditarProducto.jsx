@@ -32,7 +32,7 @@ function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
     onCerrar();
   };
 
-  if (!productoSeleccionado) return null; // evita render si no hay algo seleccionado
+  if (!productoSeleccionado) return null; 
 
   return (
     <div className="modal-overlay">
@@ -78,7 +78,7 @@ function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
             onChange={handleChange}
           />
 
-          {/* Preview de imagen */}
+          
           {producto.imagen && (
             <img 
               src={producto.imagen} 

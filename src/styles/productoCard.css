@@ -1,0 +1,48 @@
+.card-producto {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.card-producto:hover {
+  transform: translateY(-5px);
+}
+
+.card-producto img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card-producto h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.card-producto .precio {
+  font-size: 18px;
+  color: #2563eb;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card-producto button {
+  padding: 10px 15px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.card-producto button:hover {
+  background: #2563eb;
+}
