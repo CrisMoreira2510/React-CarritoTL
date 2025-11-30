@@ -1,82 +1,101 @@
 import { useState, useEffect } from "react";
 
-const EditarProducto = ({productoSeleccionado, onActualizar}) => {
+function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
 
-    const [producto, setProducto] = useState(productoSeleccionado || {
-        nombre: '',
-        precio: '',
-        descripcion:''
-    });
+  const [producto, setProducto] = useState({
+    nombre: "",
+    precio: "",
+    descripcion: "",
+    imagen: ""
+  });
 
-    const API= 'https://68eacd5f76b3362414cc33c7.mockapi.io/Productos';
+  useEffect(() => {
+    if (productoSeleccionado) {
+      setProducto(productoSeleccionado);
+    }
+  }, [productoSeleccionado]);
 
-    useEffect(() => {
-        if(productoSeleccionado)
-            setProducto(productoSeleccionado);
-    }, [productoSeleccionado]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProducto({ ...producto, [name]: value });
+  };
 
-    const handleChange = (evento) => {
-        const {name,value} = evento.target;
-        setProducto({...producto,[name]:value});
-    };
-    
-    const handleSubmit = async (evento) => {
-        evento.preventDefault();
-        try{
-            const respuesta = await fetch('${API}/${producto.id}', {
-                method: "PUT",
-                headers:{
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(producto),
-            });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-            if(!respuseta.ok) throw new Error("Error al actualizar el producto");
+    if (!producto.nombre.trim() || !producto.precio || !producto.descripcion.trim()) {
+      alert("Todos los campos son obligatorios.");
+      return;
+    }
 
-            const datos = await respuesta.json();
-            onActualizar(datos);
-            alert("Producto actualizado correctamente");
-        } catch(error){
-            console.error(error.message);
-            alert("Hubo un error al actualizar el producto");
-        }
-    };
+    onEditar(producto);
+    onCerrar();
+  };
 
-    return(
-       <form onSubmit={handleSubmit}>
-      <h2>Editar Producto</h2>
-      <div>
-        <label>Nombre:</label>
-        <input
-          type="text"
-          name="nombre"
-          value={producto.nombre || ''}
-          onChange={handleChange}
-          required
-        />
+  if (!productoSeleccionado) return null; // evita render si no hay algo seleccionado
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        
+        <h2>Editar Producto</h2>
+
+        <form onSubmit={handleSubmit}>
+          
+          <label>Nombre:</label>
+          <input 
+            type="text"
+            name="nombre"
+            value={producto.nombre}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Precio:</label>
+          <input 
+            type="number"
+            name="precio"
+            min="0"
+            value={producto.precio}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Descripción:</label>
+          <textarea
+            name="descripcion"
+            value={producto.descripcion}
+            onChange={handleChange}
+            required
+          />
+
+          <label>URL Imagen:</label>
+          <input
+            type="text"
+            name="imagen"
+            value={producto.imagen}
+            placeholder="https://ejemplo.com/img.jpg"
+            onChange={handleChange}
+          />
+
+          {/* Preview de imagen */}
+          {producto.imagen && (
+            <img 
+              src={producto.imagen} 
+              alt="preview"
+              className="img-preview"
+            />
+          )}
+
+          <div className="modal-buttons">
+            <button type="submit">Guardar cambios</button>
+            <button type="button" onClick={onCerrar}>Cancelar</button>
+          </div>
+
+        </form>
       </div>
-      <div>
-        <label>Precio:</label>
-        <input
-          type="number"
-          name="precio"
-          value={producto.precio || ''}
-          onChange={handleChange}
-          required
-          min="0"
-        />
-      </div>
-      <div>
-        <label>Descripción:</label>
-        <textarea
-          name="descripcion"
-          value={producto.descripcion || ''}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Actualizar Producto</button>
-    </form> 
-    );
+    </div>
+  );
 }
+
 export default EditarProducto;

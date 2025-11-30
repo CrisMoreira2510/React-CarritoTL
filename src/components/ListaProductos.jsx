@@ -23,6 +23,11 @@ function ListaProductos() {
         {productos.map((producto) => (
           <li key={producto.id}>
             <strong>{producto.nombre}</strong>: ${producto.precio}
+            <img
+              src={producto.imagen}
+              alt={producto.nombre}
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
+            />
             <p>{producto.descripcion}</p>
           </li>
         ))}

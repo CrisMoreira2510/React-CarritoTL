@@ -30,6 +30,12 @@ const Productos = () => {
             {productos.map((prod) => (
                 <div key={prod.id}>
                     <p>{prod.nombre} - ${prod.precio}</p>
+                    <img
+                        src={prod.imagen}
+                        alt={prod.nombre}
+                        style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                    />
+
                     <button onClick={() => agregarCarrito(prod)}>
                         Agregar al carrito
                     </button>

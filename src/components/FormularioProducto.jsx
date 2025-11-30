@@ -1,33 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-function FormularioProducto({ onAgregar }) {
+function FormularioProducto({ onAgregar, onCerrar }) {
   const [producto, setProducto] = useState({
-    nombre: '',
-    precio: '',
-    descripcion: '',
+    nombre: "",
+    precio: "",
+    descripcion: "",
+    imagen: ""   
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProducto({ ...producto, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAgregar(producto); // Llamada a la función para agregar el producto
-    setProducto({ nombre: '', precio: '', descripcion: '' }); // Limpiar el formulario
+
+    if (
+      !producto.nombre.trim() ||
+      !producto.precio ||
+      !producto.descripcion.trim()
+    ) {
+      alert("Todos los campos salvo la imagen son obligatorios.");
+      return;
+    }
+
+    onAgregar(producto);
+    setProducto({ nombre: "", precio: "", descripcion: "", imagen: "" });
+    onCerrar();
   };
-return ( <form onSubmit={handleSubmit}>
+
+  return (
+    <form onSubmit={handleSubmit}>
       <h2>Agregar Producto</h2>
-      <div>
+
+      <div style={{ marginBottom: "10px" }}>
         <label>Nombre:</label>
         <input
-          type="text" name="nombre" value={producto.nombre} onChange={handleChange} required/>
+          type="text"
+          name="nombre"
+          value={producto.nombre}
+          onChange={handleChange}
+          required
+        />
       </div>
-      <div>
+
+      <div style={{ marginBottom: "10px" }}>
         <label>Precio:</label>
-        <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
-          min="0"/>
+        <input
+          type="number"
+          name="precio"
+          value={producto.precio}
+          min="0"
+          onChange={handleChange}
+          required
+        />
       </div>
-      <div>
+
+      <div style={{ marginBottom: "10px" }}>
         <label>Descripción:</label>
         <textarea
           name="descripcion"
@@ -36,7 +66,24 @@ return ( <form onSubmit={handleSubmit}>
           required
         />
       </div>
-      <button type="submit">Agregar Producto</button>
+
+      <div style={{ marginBottom: "10px" }}>
+        <label>URL Imagen:</label>
+        <input
+          type="text"
+          name="imagen"
+          placeholder=""
+          value={producto.imagen}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div className="modal-buttons">
+         <button type="submit">Guardar</button>
+          <button type="button" onClick={onCerrar}>
+        Cancelar
+          </button>
+      </div>
     </form>
   );
 }
