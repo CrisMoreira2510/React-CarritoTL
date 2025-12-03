@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 function DetalleProducto() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [producto, setProducto] = useState(null);
 
   useEffect(() => {

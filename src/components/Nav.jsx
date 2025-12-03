@@ -5,6 +5,9 @@ import "../styles/nav.css";
 function Nav() {
     return (
         <nav className="navbar">
+            <h1 className="logo-site">
+                Talento Tech <span>eCommerce</span>
+            </h1>
 
             <ul>
                 <li><Link to="/">Inicio</Link></li>

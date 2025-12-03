@@ -1,21 +1,21 @@
-import {useState, useEffect, createContext ,useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import "../styles/FormModal.css";
 
 export const ProductoContext = createContext();
 
 export const ProductosProvider = ({ children }) => {
-    const [productos,setProductos] = useState([]);
+    const [productos, setProductos] = useState([]);
     const [cargando, setCargando] = useState(true);
-    const [error,setError] = useState(null);
+    const [error, setError] = useState(null);
 
-    const API= 'https://68eacd5f76b3362414cc33c7.mockapi.io/Productos';
+    const API = 'https://68eacd5f76b3362414cc33c7.mockapi.io/Productos';
 
-    useEffect(() =>{
+    useEffect(() => {
         cargarProductos();
-    },[]);
+    }, []);
 
-    const cargarProductos = async() => {
-        try{
+    const cargarProductos = async () => {
+        try {
             setCargando(true);
             setError(null);
 
@@ -27,11 +27,11 @@ export const ProductosProvider = ({ children }) => {
             const datos = await respuesta.json();
             setProductos(datos);
 
-        }catch(error){
+        } catch (error) {
             console.error("Error al cargar productos: ", error);
             setError(error.message || "Error al cargar los productos");
 
-        }finally{
+        } finally {
             setCargando(false);
         }
     };
@@ -39,7 +39,7 @@ export const ProductosProvider = ({ children }) => {
     const agregarProducto = async (producto) => {
         try {
             const respuesta = await fetch(API, {
-                method:"POST",
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...producto,
@@ -50,7 +50,7 @@ export const ProductosProvider = ({ children }) => {
             if (!respuesta.ok) throw new Error("Error al agregar producto");
 
             const dato = await respuesta.json();
-            setProductos([...productos, dato]); 
+            setProductos([...productos, dato]);
 
             alert("Producto agregado correctamente");
 
@@ -60,17 +60,17 @@ export const ProductosProvider = ({ children }) => {
         }
     };
 
-    const editarProducto = async (producto) =>{
-        try{
+    const editarProducto = async (producto) => {
+        try {
             setError(null);
 
-            const respuesta = await fetch (`${API}/${producto.id}`,{
+            const respuesta = await fetch(`${API}/${producto.id}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(producto),
             });
 
-            if(!respuesta.ok)
+            if (!respuesta.ok)
                 throw new Error(`Error HTTP: ${respuesta.status}`);
 
             const productoEditado = await respuesta.json();
@@ -78,11 +78,11 @@ export const ProductosProvider = ({ children }) => {
                 prod.id === productoEditado.id ? productoEditado : prod
             ));
 
-        }catch(error){
+        } catch (error) {
             console.error("Error al editar: ", error);
             setError("Hubo un problema al editar el producto");
 
-        }finally{
+        } finally {
             setCargando(false);
         }
     };
@@ -90,7 +90,7 @@ export const ProductosProvider = ({ children }) => {
     const eliminarProducto = async (id) => {
         const confirmar = window.confirm("¿Estás seguro de eliminar?");
 
-        if (confirmar){
+        if (confirmar) {
             try {
 
                 setError(null);
@@ -99,7 +99,7 @@ export const ProductosProvider = ({ children }) => {
                     method: "DELETE",
                 });
 
-                if (!respuesta.ok) 
+                if (!respuesta.ok)
                     throw new Error("Error al eliminar");
 
                 setProductos(productos.filter(p => p.id !== id));

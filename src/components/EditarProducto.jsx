@@ -32,18 +32,18 @@ function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
     onCerrar();
   };
 
-  if (!productoSeleccionado) return null; 
+  if (!productoSeleccionado) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        
+
         <h2>Editar Producto</h2>
 
         <form onSubmit={handleSubmit}>
-          
+
           <label>Nombre:</label>
-          <input 
+          <input
             type="text"
             name="nombre"
             value={producto.nombre}
@@ -52,7 +52,7 @@ function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
           />
 
           <label>Precio:</label>
-          <input 
+          <input
             type="number"
             name="precio"
             min="0"
@@ -78,10 +78,10 @@ function EditarProducto({ productoSeleccionado, onEditar, onCerrar }) {
             onChange={handleChange}
           />
 
-          
+
           {producto.imagen && (
-            <img 
-              src={producto.imagen} 
+            <img
+              src={producto.imagen}
               alt="preview"
               className="img-preview"
             />

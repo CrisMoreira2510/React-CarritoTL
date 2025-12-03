@@ -5,7 +5,7 @@ function FormularioProducto({ onAgregar, onCerrar }) {
     nombre: "",
     precio: "",
     descripcion: "",
-    imagen: ""   
+    imagen: ""
   });
 
   const handleChange = (e) => {
@@ -32,7 +32,7 @@ function FormularioProducto({ onAgregar, onCerrar }) {
 
   return (
     <form className="d-flex flex-column gap-3"
-     onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}>
       <h2>Agregar Producto</h2>
 
       <div style={{ marginBottom: "10px" }}>
@@ -80,10 +80,10 @@ function FormularioProducto({ onAgregar, onCerrar }) {
       </div>
 
       <div className="modal-buttons">
-         <button type="submit">Guardar</button>
-          <button type="button" onClick={onCerrar}>
-        Cancelar
-          </button>
+        <button type="submit">Guardar</button>
+        <button type="button" onClick={onCerrar}>
+          Cancelar
+        </button>
       </div>
     </form>
   );

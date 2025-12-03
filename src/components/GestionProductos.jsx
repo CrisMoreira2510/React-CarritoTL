@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormularioProducto from "./FormularioProducto";
 import EditarProducto from "./EditarProducto";
 import { useProductoContext } from "../context/ProductoContext";
-
+import { Helmet } from "react-helmet";
 
 const GestionProductos = () => {
 
@@ -31,9 +31,19 @@ const GestionProductos = () => {
 
     return (
         <div className="productos-container">
-            <h2 className="titulo">Gestión de Productos</h2>
 
-            <div className="grid-productos">
+            <Helmet>
+                <title>Gestión de Productos | Talento Tech eCommerce</title>
+                <meta
+                    name="description"
+                    content="Panel de administración para gestionar productos del eCommerce: agregar, editar y eliminar."
+                />
+            </Helmet>
+
+            <div className="gestion-header">
+                <h2 className="gestion-titulo">Gestión de Productos</h2>
+
+
                 <button
                     className="btn btn-primary"
                     onClick={() => {
@@ -42,18 +52,25 @@ const GestionProductos = () => {
                         setMostrarForm(true);
                     }}
                 >
-                    Agregar producto
+                    ➕ Agregar producto
                 </button>
             </div>
+            <hr></hr>
 
             <div className="grid-productos">
 
                 {productos.map((producto) => (
-                    <div className="card-producto" key={producto.id}>
+                    <div className="card-producto"
+                        key={producto.id}
+                        role="region"
+                        aria-label={`Producto: ${producto.nombre}`}>
 
                         <img src={producto.imagen} alt={producto.nombre} />
+
                         <h3>{producto.nombre}</h3>
+
                         <p className="precio">${producto.precio}</p>
+
                         <div className="mt-auto d-flex gap-2 justify-content-end">
                             <button
                                 className="btn btn-warning btn-sm"
@@ -68,7 +85,7 @@ const GestionProductos = () => {
                                     eliminarProducto(producto.id);
                                 }}
                             >
-                                Eliminar
+                                🗑 Eliminar
                             </button>
                         </div>
                     </div>
@@ -78,8 +95,14 @@ const GestionProductos = () => {
 
 
                 {mostrarForm && (
-                    <div className="modal-overlay" onClick={cerrarForm}>
+                    <div className="modal-overlay"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={modoForm === "agregar" ? "Agregar producto" : "Editar producto"}
+                        onClick={cerrarForm}>
+
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+
                             <button className="modal-close" onClick={cerrarForm}>✕</button>
 
                             {modoForm === "agregar" && (
@@ -101,7 +124,7 @@ const GestionProductos = () => {
                 )}
             </div>
         </div>
-       
+
     );
 };
 

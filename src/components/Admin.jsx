@@ -2,11 +2,11 @@ import GestionProductos from "./GestionProductos";
 
 const Admin = () => {
 
-    return(
+  return (
     <div>
       <GestionProductos />
     </div>
-    )
-    
+  )
+
 }
 export default Admin;

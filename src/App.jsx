@@ -1,8 +1,8 @@
-import reactLogo from './assets/react.svg' 
+import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import React from 'react';  
-import Header from './components/Header';  
+import React from 'react';
+import Header from './components/Header';
 import Nav from './components/Nav'
 import Inicio from './components/Inicio';
 import Contacto from './components/Contacto';
@@ -14,32 +14,31 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import RutaProtegida from './components/RutaProtegida';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-    
+
 
   return (
     <>
       <div>
-        <Header />  
+        <Header />
         <Nav />
-
         <Routes>
-          <Route path={'/'} element= {<Inicio/>}/>
-          <Route path={'/Contacto'} element= {<Contacto/>}/>
-          <Route path={'/Productos/:id'} element= {<DetalleProducto/>}/>
-
-          <Route path={'/Admin'} element= {
+          <Route path={'/'} element={<Inicio />} />
+          <Route path={'/Contacto'} element={<Contacto />} />
+          <Route path={'/Productos/:id'} element={<DetalleProducto />} />
+          <Route path={'/Admin'} element={
             <RutaProtegida>
-              <Admin/>
+              <Admin />
             </RutaProtegida>
-            }/>
-          <Route path={'/Login'} element= {<Login/>}/>
+          } />
+          <Route path={'/Login'} element={<Login />} />
         </Routes>
-
-              
-        <Footer />                 
-      </div>      
+        <Footer />
+      </div>
+      <ToastContainer position="top-right" autoClose={2500} />
     </>
   );
 }

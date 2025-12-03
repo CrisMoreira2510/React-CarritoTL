@@ -3,6 +3,7 @@ import { CarritoContext } from "../context/CarritoContext";
 import { useProductoContext } from "../context/ProductoContext";
 import "../styles/productoGrid.css";
 import "../styles/productoCard.css";
+import { Helmet } from "react-helmet";
 
 const Productos = () => {
     const { productos, cargando, error } = useProductoContext();
@@ -12,19 +13,30 @@ const Productos = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="productos-container">
-            <h2 className="titulo">Productos</h2>
 
-            <div className="grid-productos">
+        <div className="productos-container">
+            <Helmet>
+                <title>Talento Tech eCommerce – Productos</title>
+                <meta
+                    name="description"
+                    content="Listado de productos disponibles para comprar en el eCommerce de Talento Tech."
+                />
+            </Helmet>
+
+
+
+            <div className="grid-productos" role="list">
                 {productos.map((prod) => (
-                    <div className="card-producto" key={prod.id}>
+                    <div className="card-producto" key={prod.id} role="listitem">
                         <img src={prod.imagen} alt={prod.nombre} />
 
                         <h3>{prod.nombre}</h3>
                         <p>${prod.precio}</p>
 
                         <button className="btn-agregar"
-                            onClick={() => agregarCarrito(prod)}>
+                            onClick={() => agregarCarrito(prod)}
+                            aria-label={`Agregar ${prod.nombre} al carrito`}
+                        >
                             Agregar al carrito
                         </button>
                     </div>

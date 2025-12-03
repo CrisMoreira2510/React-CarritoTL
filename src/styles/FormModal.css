@@ -13,7 +13,7 @@
   width: 95%;
   max-width: 500px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   position: relative !important;
   z-index: 100000 !important;
 }
@@ -107,11 +107,13 @@
     opacity: 0;
     transform: translateY(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .modal-overlay {
   position: fixed !important;
   top: 0 !important;
